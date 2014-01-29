@@ -57,10 +57,12 @@ public class Main {
 
             //Configuramos JGAP
             Configuration configuracion = new DefaultConfiguration();
-
+            
             FitnessFunction myFunc = new funcionAptitud();
             configuracion.setFitnessFunction(myFunc); //Le indicamos a JGAP cual sera nuestra funcion de aptitud
-
+            /*
+            Se establece el numero de profesores en esta variable
+            */
             Gene[] genEjemplo = new Gene[9];
             //Creamos una codificacion de 9 genes que nos servira para nuestros individuos (fenotipo)
             //Los genes seran valores entre 1 y 9 (por el cuadrado magico de 3x3)
@@ -73,7 +75,11 @@ public class Main {
             genEjemplo[6] = new IntegerGene(configuracion, 1, 9);
             genEjemplo[7] = new IntegerGene(configuracion, 1, 9);
             genEjemplo[8] = new IntegerGene(configuracion, 1, 9);
-            
+           
+            /*
+            Se establece el gen según cada profesor[codProfesor]
+            genEjemplo[0] = new IntegerGene
+            */
 
             //Recordemos que los cromosomas son el correspondiente a los individuos
             Chromosome cromosomaCuadradoMagico = new Chromosome(configuracion, genEjemplo); //Creamos un individuo a partir de la configuracion de los genes anterior
@@ -87,6 +93,9 @@ public class Main {
 
 
             //Comienza a iterar el algoritmo
+            /*
+            número de eras o generaciones
+            */
             for (int m = 0 ; m < 50 ; m++) //50 iteraciones, cada iteracion sera una generacion
             {
                 population.evolve();

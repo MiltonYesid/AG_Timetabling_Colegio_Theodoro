@@ -24,6 +24,7 @@ public class funcionAptitud extends FitnessFunction {
 
     @Override
     public double evaluate(IChromosome cromosoma) {
+        //se establece el valor de cada funcion
         fitness = 0;
         verificarRepetidos(cromosoma);
         if(fitness!=0)
