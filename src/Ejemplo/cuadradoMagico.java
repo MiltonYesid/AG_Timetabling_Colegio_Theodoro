@@ -7,7 +7,6 @@
 package Ejemplo;
 
 //Libreria JGAP
-import ag_pi1.funcionAptitud;
 import org.jgap.Chromosome;
 import org.jgap.Configuration;
 import org.jgap.FitnessFunction;

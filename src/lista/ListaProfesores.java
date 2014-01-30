@@ -12,7 +12,17 @@ public class ListaProfesores {
 
     public ListaProfesores() {
     }
-
+    public int cantidadProfesores()
+    {
+        int i = 0;
+        Nodo_profesor x = this.primero;
+        while(x != null)
+        {
+            i++;
+            x = x.getSig();
+        }
+        return i;
+    }
     public void insertarProfesor(Nodo_profesor profesor) {
         if (this.primero == null) {
             this.primero = this.ultimo = profesor;

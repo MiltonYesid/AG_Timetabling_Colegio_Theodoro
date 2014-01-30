@@ -9,15 +9,19 @@ package ag_pi1;
  *
  * @author Milton Yesid F G
  */
+import lista.Estructuras;
+import lista.Nodo_profesor;
 import org.jgap.FitnessFunction;
 import org.jgap.Gene;
 import org.jgap.IChromosome;
 
 public class RestriccionesDominio extends FitnessFunction {
+
+    public RestriccionesDominio() {
+    }
     /*
      Valor total a retornar evaluado para cada cromosoma
      */
-
     private double fitness;
     /*
      Se establece que el idProfesor es una varible que se establece del for 
@@ -28,16 +32,18 @@ public class RestriccionesDominio extends FitnessFunction {
     /*
      tamaño total de profesores
      */
-    private int sizeProfesores = 0;
+    private int sizeProfesores;
     /*
      Estructuras;
      EJB de Profesores[intesidadHorariaProfesor(min,max)]
      EJB de Cursos
+     se obtiene las estructuras a trabajar
      */
-
-    RestriccionesDominio(int id) {
-        this.idProfesor = id;
-    }
+    public static Estructuras estructura = new Estructuras();
+    /*
+     * posicion
+     */
+    int k = 0;
 
     @Override
     protected double evaluate(IChromosome ic) {
@@ -50,7 +56,10 @@ public class RestriccionesDominio extends FitnessFunction {
         /*
          evaluar por cada profesor del sistema
          */
+        this.sizeProfesores = this.estructura.listaProfesores.cantidadProfesores();
         for (int i = 0; i < this.sizeProfesores; i++) {
+            this.idProfesor = i + 1;
+            this.verificarProfesor(ic);
             this.evaluarDisponibilidadHorariaProfesor(ic);
             this.evaluarProfesoresDictaCurso(ic);
             this.evaluarIntensidadHorariaProfesor(ic);
@@ -65,37 +74,53 @@ public class RestriccionesDominio extends FitnessFunction {
      evaluarDisponibilidadHorariaProfesor: Satisface que un profesor dicte clases en el horario en el cual presenta disponibilidad.
      */
     public void evaluarDisponibilidadHorariaProfesor(IChromosome cromosoma) {
-
+        int valor = this.idProfesor * 4;
+        Integer codigoProfesor = (Integer) cromosoma.getGene(valor - 4).getAllele();
+        Integer dia = (Integer) cromosoma.getGene(valor - 3).getAllele();
+        Integer hora = (Integer) cromosoma.getGene(valor - 2).getAllele();
+        Integer curso = (Integer) cromosoma.getGene(valor - 1).getAllele();
+        
+        Nodo_profesor  profesor = this.estructura.listaProfesores.buscar(codigoProfesor);
+        if(profesor != null)
+        {
+            
+        }else
+        {
+            
+        }
     }
     /*
      evaluarProfesoresDictaCurso:satisface que un profesor sea asignado a un curso que pueda dictar.
      */
+
     public void evaluarProfesoresDictaCurso(IChromosome cromosoma) {
+    }
+    /*
+     satisface que un profesor no dicte mas o menos horas de las reglamentadas en su contrato
+     */
 
+    public void evaluarIntensidadHorariaProfesor(IChromosome cromosoma) {
     }
     /*
-    satisface que un profesor no dicte mas o menos horas de las reglamentadas en su contrato
-    */
-    public void evaluarIntensidadHorariaProfesor(IChromosome cromosoma)
-    {
-        
-    }
-    /*
-    satisface que un curso y/o Profesor tenga el mismo curso asignado
-    */
-    public void evaluarUnCursoNoTengaMasProfesores(IChromosome cromosoma)
-    {
-        
-    }
-    /*
-    Satisface que un curso tenga las horas estipuladas dadas
-    */
-    public void evaluarIntensidadHorariaCurso(IChromosome cromosoma)
-    {
-        
-    }
-    /*
-    Se obvian las restricciones de hora y espacio para cada profesor
-    */
+     satisface que un curso y/o Profesor tenga el mismo curso asignado
+     */
 
+    public void evaluarUnCursoNoTengaMasProfesores(IChromosome cromosoma) {
+    }
+    /*
+     Satisface que un curso tenga las horas estipuladas dadas
+     */
+
+    public void evaluarIntensidadHorariaCurso(IChromosome cromosoma) {
+    }
+    /*
+     Se obvian las restricciones de hora y espacio para cada profesor
+     */
+
+    /*
+     * verificar que un profesor si exista
+     */
+    private void verificarProfesor(IChromosome ic) {
+        
+    }
 }
