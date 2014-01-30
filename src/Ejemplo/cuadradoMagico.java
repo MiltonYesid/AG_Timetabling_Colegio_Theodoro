@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 
-package ag_pi1;
+package Ejemplo;
 
 //Libreria JGAP
+import ag_pi1.funcionAptitud;
 import org.jgap.Chromosome;
 import org.jgap.Configuration;
 import org.jgap.FitnessFunction;
@@ -16,10 +17,11 @@ import org.jgap.IChromosome;
 import org.jgap.InvalidConfigurationException;
 import org.jgap.impl.DefaultConfiguration;
 import org.jgap.impl.IntegerGene;
+import org.jgap.impl.StringGene;
 
 
 
-public class Main {
+public class cuadradoMagico {
 
     /**
      * @param args the command line arguments
