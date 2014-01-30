@@ -96,9 +96,86 @@ public class Estructuras {
         profesor.setListaCursos(listaCurso);
         this.listaProfesores.insertarProfesor(profesor);
         
+         /*
+         * Instanciación de varios profesores
+         */
+        profesor = new Nodo_profesor();
+        profesor.setId_profesor(5);
+        profesor.setNombre("Leidy Velez");
+        /*
+         * Disponibilidad Horaria Profesor
+         */
+        disponibilidad = new disponibilidadHoraria();
+        dispo = new Nodo_disponibilidad();
+        dispo.setDiaHora(40);
+        dispo.setTarea("CLASE");
+        dispo.setDiaHora(48);
+        dispo.setTarea("CLASE");
+        dispo.setDiaHora(25);
+        dispo.setTarea("CLASE");
+        dispo.setDiaHora(22);
+        dispo.setTarea("CLASE");
+        dispo.setDiaHora(44);
+        dispo.setTarea("CLASE");
+        dispo.setDiaHora(41);
+        dispo.setTarea("CLASE");
+        dispo.setDiaHora(53);
+        dispo.setTarea("CLASE");
+        disponibilidad.insertar(dispo);
+        profesor.setDisponibilidad(disponibilidad);
+        /*
+         * Lista de Cursos que puede dictar
+         */
+        listaCurso = new cursosAsignadosProfesor();
+        curso = new Nodo_Curso();
+        curso.setIdCurso(7);
+        curso.setNombreCurso("cultura");
+        curso.setCantidadHoraria(4);
+        listaCurso.insertarCurso(curso);
+        this.listaCursos.insertarCurso(curso);
+        profesor.setListaCursos(listaCurso);
+        this.listaProfesores.insertarProfesor(profesor);
         
         
-        
+        /*
+         * Instanciación de varios profesores
+         */
+        profesor = new Nodo_profesor();
+        profesor.setId_profesor(10);
+        profesor.setNombre("hernando silva");
+        /*
+         * Disponibilidad Horaria Profesor
+         */
+        disponibilidad = new disponibilidadHoraria();
+        dispo = new Nodo_disponibilidad();
+        dispo.setDiaHora(40);
+        dispo.setTarea("CLASE");
+        dispo.setDiaHora(48);
+        dispo.setTarea("CLASE");
+        dispo.setDiaHora(25);
+        dispo.setTarea("CLASE");
+        dispo.setDiaHora(22);
+        dispo.setTarea("CLASE");
+        dispo.setDiaHora(44);
+        dispo.setTarea("CLASE");
+        dispo.setDiaHora(41);
+        dispo.setTarea("CLASE");
+        dispo.setDiaHora(53);
+        dispo.setTarea("CLASE");
+        disponibilidad.insertar(dispo);
+        profesor.setDisponibilidad(disponibilidad);
+        /*
+         * Lista de Cursos que puede dictar
+         */
+        listaCurso = new cursosAsignadosProfesor();
+        curso = new Nodo_Curso();
+        curso.setIdCurso(15);
+        curso.setNombreCurso("fudnamentos");
+        curso.setCantidadHoraria(4);
+        listaCurso.insertarCurso(curso);
+        this.listaCursos.insertarCurso(curso);
+        profesor.setListaCursos(listaCurso);
+        this.listaProfesores.insertarProfesor(profesor);
         
     }
     private void inicializarListas()

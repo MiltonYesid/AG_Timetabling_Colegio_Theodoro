@@ -59,12 +59,13 @@ public class RestriccionesDominio extends FitnessFunction {
         this.sizeProfesores = this.estructura.listaProfesores.cantidadProfesores();
         for (int i = 0; i < this.sizeProfesores; i++) {
             this.idProfesor = i + 1;
-            this.verificarProfesor(ic);
-            this.evaluarDisponibilidadHorariaProfesor(ic);
-            this.evaluarProfesoresDictaCurso(ic);
-            this.evaluarIntensidadHorariaProfesor(ic);
-            this.evaluarUnCursoNoTengaMasProfesores(ic);
-            this.evaluarIntensidadHorariaCurso(ic);
+//            if (this.verificarProfesor(ic)) {
+                this.evaluarDisponibilidadHorariaProfesor(ic);
+                this.evaluarProfesoresDictaCurso(ic);
+                this.evaluarIntensidadHorariaProfesor(ic);
+                this.evaluarUnCursoNoTengaMasProfesores(ic);
+                this.evaluarIntensidadHorariaCurso(ic);
+//            }
         }
 
         return fitness;
@@ -74,20 +75,15 @@ public class RestriccionesDominio extends FitnessFunction {
      evaluarDisponibilidadHorariaProfesor: Satisface que un profesor dicte clases en el horario en el cual presenta disponibilidad.
      */
     public void evaluarDisponibilidadHorariaProfesor(IChromosome cromosoma) {
-        int valor = this.idProfesor * 4;
-        Integer codigoProfesor = (Integer) cromosoma.getGene(valor - 4).getAllele();
-        Integer dia = (Integer) cromosoma.getGene(valor - 3).getAllele();
-        Integer hora = (Integer) cromosoma.getGene(valor - 2).getAllele();
-        Integer curso = (Integer) cromosoma.getGene(valor - 1).getAllele();
-        
-        Nodo_profesor  profesor = this.estructura.listaProfesores.buscar(codigoProfesor);
-        if(profesor != null)
-        {
-            
-        }else
-        {
-            
-        }
+//        int valor = this.idProfesor * 4;
+//        Integer codigoProfesor = (Integer) cromosoma.getGene(valor - 4).getAllele();
+//        Integer dia = (Integer) cromosoma.getGene(valor - 3).getAllele();
+//        Integer hora = (Integer) cromosoma.getGene(valor - 2).getAllele();
+//        Integer curso = (Integer) cromosoma.getGene(valor - 1).getAllele();
+//
+//        Nodo_profesor profesor = this.estructura.listaProfesores.buscar(codigoProfesor);
+////        System.out.println("profesor encontrado"+profesor.getNombre());
+//        this.fitness= this.fitness+10;
     }
     /*
      evaluarProfesoresDictaCurso:satisface que un profesor sea asignado a un curso que pueda dictar.
@@ -120,7 +116,13 @@ public class RestriccionesDominio extends FitnessFunction {
     /*
      * verificar que un profesor si exista
      */
-    private void verificarProfesor(IChromosome ic) {
-        
+    private boolean verificarProfesor(IChromosome cromosoma) {
+        int valor = this.idProfesor * 4;
+        Integer codigoProfesor = (Integer) cromosoma.getGene(valor - 4).getAllele();
+        Nodo_profesor profesor = this.estructura.listaProfesores.buscar(codigoProfesor);
+        if (profesor != null) {
+            return true;
+        }
+        return false;
     }
 }

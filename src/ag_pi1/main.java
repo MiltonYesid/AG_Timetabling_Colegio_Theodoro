@@ -35,21 +35,21 @@ public class main {
         for (int i = 0; i < cantidadProfesores; i++) {
             for (int j = 1; j < 5; j++) {
                 Integer c = (Integer) TTPsolucion.getGene(j).getAllele();
-                switch (j) {
-                    case 1:
-                        System.out.print("codigo:" + c);
-                        break;
-                    case 2:
-                        System.out.print("  día: " + c);
-                        break;
-                    case 3:
-                        System.out.print("  hora: " + c);
-                        break;
-                    case 4:
-                        System.out.print("  curso: " + c);
-                        break;
-                }
-                
+//                switch (j) {
+//                    case 1:
+//                        System.out.print("codigo:" + c);
+//                        break;
+//                    case 2:
+//                        System.out.print("  día: " + c);
+//                        break;
+//                    case 3:
+//                        System.out.print("  hora: " + c);
+//                        break;
+//                    case 4:
+//                        System.out.print("  curso: " + c);
+//                        break;
+//                }
+
             }
             System.out.println("");
         }
@@ -62,52 +62,105 @@ public class main {
              */
             int cantidadProfesores = estructura.listaProfesores.cantidadProfesores();
             System.out.println("la cantidad de profesores es:" + cantidadProfesores);
-
             /*
-             * la cantidad del genoma esta dada por:
+             * horas semanales
              */
-            int totalGenoma = 4 * cantidadProfesores;
+            int cantidadDias = 5;
+            int cantidadHoras = 9;
+            int totalHorasSemana = (cantidadDias * cantidadHoras);
+            System.out.println(totalHorasSemana);
+            /*
+             * cantidad total de profesores
+             */
+            int cantidadTotalProfesores = 27;
+            /*
+             * cantidad total de cursos en el colegio
+             */
+            int cantidadTotalCursos = 225;
+            /*
+             * el tamaño del fenoma esta dado por
+             */
+            int totalGenoma = cantidadProfesores * (totalHorasSemana * 2)+50;
+
             System.out.println("total cromosoma" + totalGenoma);
+            /*
+             * se genera el genoma del cromosoma
+             */
             Gene[] genoma = new Gene[totalGenoma];
-            if (cantidadProfesores > 0) {
+            /*
+             * se valida que exista la lista con datos
+             */
+            
+            boolean bandera = true;
             int l = 0;
-                for (int k = 0; k < cantidadProfesores; k++) {
-                    for (int j = 1; j < 5; j++) {
-                        switch (j) {
-                            case 1:
-                                /*
-                                 * codigo del profesor
-                                 */
-                                genoma[l] = new IntegerGene(configuracion, 1, 27);
-                                break;
-                            case 2:
-                                /*
-                                 * dia
-                                 */
-                                genoma[l] = new IntegerGene(configuracion, 1, 5);
-                                break;
-                            case 3:
-                                /*
-                                 * hora
-                                 */
-                                genoma[l] = new IntegerGene(configuracion, 1, 12);
-                                break;
-                            case 4:
-                                /*
-                                 * curso
-                                 */
-                                genoma[l] = new IntegerGene(configuracion, 1, 9);
-                                break;
-                        }
-                        l++;
-                    }
+            for (int i = 0; i < cantidadProfesores; i++) {
+                /*
+                 * codigos de profesor
+                 */
+                System.out.println("-------------------");
+                System.out.println("HORA|L");
+                System.out.println("codigo profesor:" + i);
+                System.out.println("--------------------");
+                
+                genoma[l] = new IntegerGene(configuracion, 1, i);
+                l++;
+                for (int j = 1; j < cantidadDias + 1; j++) {
+                    /*
+                     * cantidad de dias
+                     */
+                    System.out.println("");
+                    System.out.println("DIA:"+j);
                     
+                    genoma[l] = new IntegerGene(configuracion, 1, j);
+                    l++;
+                    for (int k = 1; k < cantidadHoras + 1; k++) {
+                        /*
+                         * cantidad de horas
+                         */
+                        
+                        
+                        genoma[l] = new IntegerGene(configuracion, 1, k);
+                        l++;
+                        /*
+                         * cursos
+                         */
+                  
+                        genoma[l] = new IntegerGene(configuracion, 1, cantidadTotalCursos);
+                        l++;
+
+                        System.out.print("  " + k + " " + l);
+                        if (l == totalGenoma) {
+                            bandera = false;
+                            System.out.println("problema");
+                            break;
+                        }
+
+                    }
                 }
 
-            } else {
-                System.out.println("No existe ningún profesor en el sistema");
             }
+
+
+//            for (int i = 0; i < cantidadProfesores; i++) {
+//                /*
+//                 * codigos de profesor
+//                 */
+//                genoma[l] = new IntegerGene(configuracion, 1, cantidadTotalProfesores);
+//                l++;
+//                for (int j = 0; j < totalHorasSemana; j++) {
+//                    genoma[l] = new IntegerGene(configuracion, 11, totalHorasSemana);
+//                    l++;
+//                    genoma[l] = new IntegerGene(configuracion, 1, cantidadTotalCursos);
+//                    l++;
+//                }
+//            }
+            if(bandera)
+            {
             return genoma;
+            }else
+            {
+                return null;
+            }
         } catch (InvalidConfigurationException ex) {
             System.out.println("No se pudo ejecutar el AG");
 
@@ -116,7 +169,7 @@ public class main {
     }
 
     public static void main(String[] args) {
-    
+
         try {
             // Start with a DefaultConfiguration, which comes setup with the
             // most common settings.
@@ -131,7 +184,11 @@ public class main {
              * Se crea el cromosoma 
              */
             Gene[] genoma = crearCromosoma(configuracion);
-
+            if(genoma == null)
+            {
+                System.out.println("problema");
+            }
+                 
             /*
              Se establece el gen según cada profesor[codProfesor]
              genEjemplo[0] = new IntegerGene
