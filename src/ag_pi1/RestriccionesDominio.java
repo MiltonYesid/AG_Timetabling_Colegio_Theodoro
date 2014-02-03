@@ -56,7 +56,7 @@ public class RestriccionesDominio extends FitnessFunction {
         fitness = 0;
         /*
          evaluar por cada profesor del sistema
-         */
+         */ 
         this.sizeProfesores = this.estructura.listaProfesores.cantidadProfesores();
 //        for (int i = 0; i < this.sizeProfesores; i++) {
 //            this.idProfesor = i + 1;
@@ -70,6 +70,7 @@ public class RestriccionesDominio extends FitnessFunction {
 //        }
         for (int i = 0; i < this.sizeProfesores; i++) {
             this.evaluarProfesoresDictaCurso(ic);
+            this.existeProfesor(ic);
         }
 
         return fitness;
@@ -92,7 +93,20 @@ public class RestriccionesDominio extends FitnessFunction {
     /*
      evaluarProfesoresDictaCurso:satisface que un profesor sea asignado a un curso que pueda dictar.
      */
-
+    public void existeProfesor(IChromosome cromosoma)
+    {
+        int cantidadTotalHoras = 44;
+        int c = 0;
+        for (int i = 0; i < cantidadTotalHoras; i = i + 2) {
+            c = (Integer) cromosoma.getGene(i).getAllele();
+            Nodo_profesor profesor = this.estructura.listaProfesores.buscar(c);
+            if (profesor != null) {
+                this.fitness = this.fitness+5;
+            }
+        }
+        this.estructura.listaProfesores.buscar(0);
+    }
+    
     public void evaluarProfesoresDictaCurso(IChromosome cromosoma) {
         int cantidadTotalHoras = 44;
         int c = 0;

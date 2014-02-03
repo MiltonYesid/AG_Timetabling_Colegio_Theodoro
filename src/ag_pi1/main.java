@@ -26,7 +26,7 @@ public class main {
      */
     private static int cantidadDias = 5;
     private static int cantidadHoras = 9;
-    private static int totalHorasSemana = (cantidadDias * cantidadHoras) - 1;
+    private static final int totalHorasSemana = ((cantidadDias * cantidadHoras) - 1)*2;
     private static int nroEras = 50;
 
     public static void main(String[] args) {

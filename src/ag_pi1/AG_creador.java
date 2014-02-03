@@ -21,7 +21,7 @@ public class AG_creador {
      */
     private static final int cantidadDias = 5;
     private static final int cantidadHoras = 9;
-    private static final int totalHorasSemana = (cantidadDias * cantidadHoras) - 1;
+    private static final int totalHorasSemana = ((cantidadDias * cantidadHoras) - 1)*2;
     private static final int cantidadProfesores = 29;
     private static final int cantidadCursos = 232;
 
