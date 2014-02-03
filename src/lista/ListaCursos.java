@@ -14,6 +14,19 @@ public class ListaCursos {
     {
        
     }
+    public Nodo_Curso buscar(int id)
+    {
+        Nodo_Curso x = this.primero;
+        while(x != null)
+        {
+            if(x.getIdCurso() == id)
+            {
+                return x;
+            }
+            x = x.getSig();
+        }
+        return null;
+    }
     public void insertarCurso(Nodo_Curso curso)
     {
          if (this.primero == null) {

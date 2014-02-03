@@ -1,6 +1,9 @@
 package ag_pi1;
 
 import static ag_pi1.main.estructura;
+import lista.Estructuras;
+import lista.Nodo_Curso;
+import lista.Nodo_profesor;
 import org.jgap.Configuration;
 import org.jgap.Gene;
 import org.jgap.IChromosome;
@@ -13,86 +16,29 @@ import org.jgap.impl.IntegerGene;
  */
 public class AG_creador {
 
+    /*
+     variables del dominio
+     */
+    private static final int cantidadDias = 5;
+    private static final int cantidadHoras = 9;
+    private static final int totalHorasSemana = (cantidadDias * cantidadHoras) - 1;
+    private static final int cantidadProfesores = 29;
+    private static final int cantidadCursos = 232;
+
     public static Gene[] crearCromosoma(Configuration configuracion) {
         try {
-            /*
-             * obtiene el # de profesores 
-             */
-            int cantidadProfesores = estructura.listaProfesores.cantidadProfesores();
-            System.out.println("la cantidad de profesores es:" + cantidadProfesores);
-            /*
-             * horas semanales
-             */
-            int cantidadDias = 5;
-            int cantidadHoras = 9;
-            int totalHorasSemana = (cantidadDias * cantidadHoras);
-            System.out.println(totalHorasSemana);
-            /*
-             * cantidad total de profesores
-             */
-            int cantidadTotalProfesores = 27;
-            /*
-             * cantidad total de cursos en el colegio
-             */
-            int cantidadTotalCursos = 225;
-            /*
-             * el tamaño del fenoma esta dado por
-             */
-            int totalGenoma = cantidadProfesores * 96;
+            Gene[] genoma = new Gene[totalHorasSemana];
 
-            System.out.println("total cromosoma" + totalGenoma);
-            /*
-             * se genera el genoma del cromosoma
-             */
-            Gene[] genoma = new Gene[totalGenoma];
-            /*
-             * se valida que exista la lista con datos
-             */
-
-            boolean bandera = true;
-            int l = 0;
-            for (int i = 0; i < cantidadProfesores; i++) {
-                /*
-                 * codigos de profesor
-                 */
-                System.out.println("-------------------");
-                System.out.println("HORA|L");
-                System.out.println("codigo profesor:" + i);
-                System.out.println("--------------------");
-
-                genoma[l] = new IntegerGene(configuracion, 1, 32);
-                l++;
-                for (int j = 1; j < cantidadDias + 1; j++) {
-                    /*
-                     * cantidad de dias
-                     */
-                    System.out.println("");
-                    System.out.println("DIA:" + j);
-
-                    genoma[l] = new IntegerGene(configuracion, 1, j);
-                    l++;
-                    for (int k = 1; k < cantidadHoras + 1; k++) {
-                        /*
-                         * cantidad de horas
-                         */
-                        genoma[l] = new IntegerGene(configuracion, 1, 9);
-                        l++;
-                        /*
-                         * cursos
-                         */
-                        genoma[l] = new IntegerGene(configuracion, 1, 9);
-                        l++;
-                        System.out.print("  " + k + " " + l);
-                    }
+            for (int i = 0; i < totalHorasSemana; i++) {
+                if (i % 2 == 0) {
+                    genoma[i] = new IntegerGene(configuracion, 1, cantidadProfesores);
+                } else {
+                    genoma[i] = new IntegerGene(configuracion, 1, cantidadCursos);
                 }
-
             }
-
             return genoma;
-
         } catch (InvalidConfigurationException ex) {
             System.out.println("No se pudo ejecutar el AG");
-
         }
         return null;
     }
@@ -103,43 +49,47 @@ public class AG_creador {
      */
     public static void mostrarCromosoma(IChromosome TTPsolucion) {
         Gene[] genoma = TTPsolucion.getGenes();
-        int cantidadProfesores = estructura.listaProfesores.cantidadProfesores();
-        System.out.println("la cantidad de profesores es:" + cantidadProfesores);
-
-        Integer c = 0;
+        int c = 0;
         int l = 0;
-        for (int i = 0; i < cantidadProfesores; i++) {
-
-
-            c = (Integer) TTPsolucion.getGene(l).getAllele();
-            l++;
-            System.out.println("codigo profesor:" + c);
-            for (int j = 1; j < 6 ; j++) {
-                /*
-                 * cantidad de dias
-                 */
-                c = (Integer) TTPsolucion.getGene(l).getAllele();
-                l++;
-                System.out.println("DIA:" + c);
-                System.out.println("");
-
-                for (int k = 1; k < 10 ; k++) {
-                    /*
-                     * cantidad de horas
-                     */
-                    c = (Integer) TTPsolucion.getGene(l).getAllele();
-                    l++;
-                    System.out.print("hora:" + c);
-                    /*
-                     * cursos
-                     */
-                    c = (Integer) TTPsolucion.getGene(l).getAllele();
-                    l++;
-                    System.out.print("curso" + k);
-                }
+        boolean bandera = false;
+        for (int i = 0; i < totalHorasSemana; i++) {
+            c = (Integer) TTPsolucion.getGene(i).getAllele();
+            l = i / 2;
+            if (bandera == false) {
+                System.out.print("H"+(l+1));
+                bandera = true;
             }
-
+                if (i % 2 == 0) {
+                    imprimirNombresProfesor(c);
+                } else {
+                    imprimirNombresCurso(c);
+                    bandera = false;
+                }
         }
-
     }
+    public static  Estructuras estructura = new Estructuras();
+    public static void imprimirNombresProfesor(int id)
+    {
+        Nodo_profesor profesor = estructura.listaProfesores.buscar(id);
+        if(profesor == null)
+        {
+            System.out.print("T"+id);
+        }else
+        {
+            System.out.print(profesor.getNombre());
+        }
+    }
+    public static void imprimirNombresCurso(int id)
+    {
+        Nodo_Curso curso = estructura.listaCursos.buscar(id);
+        if(curso == null)
+        {
+            System.out.print("C"+id+"|");
+        }else
+        {
+            System.out.print(curso.getNombreCurso()+"|");
+        }
+    }
+    
+    
 }

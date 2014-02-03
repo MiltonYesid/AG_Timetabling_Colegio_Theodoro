@@ -10,6 +10,7 @@ package ag_pi1;
  * @author Milton Yesid F G
  */
 import lista.Estructuras;
+import lista.Nodo_Curso;
 import lista.Nodo_profesor;
 import org.jgap.FitnessFunction;
 import org.jgap.Gene;
@@ -57,15 +58,18 @@ public class RestriccionesDominio extends FitnessFunction {
          evaluar por cada profesor del sistema
          */
         this.sizeProfesores = this.estructura.listaProfesores.cantidadProfesores();
+//        for (int i = 0; i < this.sizeProfesores; i++) {
+//            this.idProfesor = i + 1;
+////            if (this.verificarProfesor(ic)) {
+//                this.evaluarDisponibilidadHorariaProfesor(ic);
+//                this.evaluarProfesoresDictaCurso(ic);
+//                this.evaluarIntensidadHorariaProfesor(ic);
+//                this.evaluarUnCursoNoTengaMasProfesores(ic);
+//                this.evaluarIntensidadHorariaCurso(ic);
+////            }
+//        }
         for (int i = 0; i < this.sizeProfesores; i++) {
-            this.idProfesor = i + 1;
-//            if (this.verificarProfesor(ic)) {
-                this.evaluarDisponibilidadHorariaProfesor(ic);
-                this.evaluarProfesoresDictaCurso(ic);
-                this.evaluarIntensidadHorariaProfesor(ic);
-                this.evaluarUnCursoNoTengaMasProfesores(ic);
-                this.evaluarIntensidadHorariaCurso(ic);
-//            }
+            this.evaluarProfesoresDictaCurso(ic);
         }
 
         return fitness;
@@ -90,6 +94,32 @@ public class RestriccionesDominio extends FitnessFunction {
      */
 
     public void evaluarProfesoresDictaCurso(IChromosome cromosoma) {
+        int cantidadTotalHoras = 44;
+        int c = 0;
+        int aux = 0;
+        int idCurso = 0;
+        for (int i = 0; i < cantidadTotalHoras; i = i + 2) {
+            c = (Integer) cromosoma.getGene(i).getAllele();
+            Nodo_profesor profesor = this.estructura.listaProfesores.buscar(c);
+            if (profesor != null) {
+                aux = i + 1;
+                idCurso = (Integer) cromosoma.getGene(aux).getAllele();
+                    this.profesorDictaCurso(idCurso, profesor);
+            }
+        }
+        this.estructura.listaProfesores.buscar(0);
+    }
+
+    public void profesorDictaCurso(int codigoCurso, Nodo_profesor profesor) {
+        Nodo_Curso x = profesor.getListaCursos().getPrimero();
+        while (x != null) {
+            if (x.getIdCurso() == codigoCurso) {
+                this.fitness = this.fitness + 10;
+                return;
+            }
+            x = x.getSig();
+        }
+
     }
     /*
      satisface que un profesor no dicte mas o menos horas de las reglamentadas en su contrato
