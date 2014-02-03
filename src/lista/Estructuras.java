@@ -4,6 +4,8 @@
  */
 package lista;
 
+import java.util.Vector;
+
 /**
  *
  * @author milton.fernandez
@@ -12,9 +14,11 @@ public class Estructuras {
 
     public ListaProfesores listaProfesores;
     public ListaCursos listaCursos;
+    public int idCurso = 1;
+    public int idProfesor = 1;
     public Estructuras() {
         this.inicializarListas();
-        
+
         /*
          * Instanciación de varios profesores
          */
@@ -54,8 +58,7 @@ public class Estructuras {
         this.listaCursos.insertarCurso(curso);
         profesor.setListaCursos(listaCurso);
         this.listaProfesores.insertarProfesor(profesor);
-        
-        
+
         /*
          * Instanciación de varios profesores
          */
@@ -95,8 +98,8 @@ public class Estructuras {
         this.listaCursos.insertarCurso(curso);
         profesor.setListaCursos(listaCurso);
         this.listaProfesores.insertarProfesor(profesor);
-        
-         /*
+
+        /*
          * Instanciación de varios profesores
          */
         profesor = new Nodo_profesor();
@@ -135,8 +138,7 @@ public class Estructuras {
         this.listaCursos.insertarCurso(curso);
         profesor.setListaCursos(listaCurso);
         this.listaProfesores.insertarProfesor(profesor);
-        
-        
+
         /*
          * Instanciación de varios profesores
          */
@@ -176,11 +178,128 @@ public class Estructuras {
         this.listaCursos.insertarCurso(curso);
         profesor.setListaCursos(listaCurso);
         this.listaProfesores.insertarProfesor(profesor);
-        
+
     }
-    private void inicializarListas()
-    {
+
+    private void inicializarListas() {
         this.listaCursos = new ListaCursos();
         this.listaProfesores = new ListaProfesores();
+        construirCursos5();
+        construirCursos11();
+        construirProfesores();
+    }
+
+    private void construirCursos5() {
+        String v[] = {"Música",
+            "Ed. Física",
+            "Español",
+            "Grammar",
+            "Sociales",
+            "Matemáticas",
+            "Literature",
+            "Hebreo ",
+            "Informática",
+            "Science ",
+            "PAI",
+            "Biblioteca",
+            "Etica",
+            "Phonetics",
+            "Cultura",
+            "Ed. Artística",
+            "Religión ",
+            "Geometría"};
+        Nodo_Curso x;
+        for (int i = 1; i < 6; i++) {
+            x = new Nodo_Curso();
+            for (int j = 0; j < v.length; j++) {
+                x.setNombreCurso(v[j].toString() + i);
+                x.setIdCurso(idCurso);
+                this.idCurso++;
+            }
+        }
+    }
+
+    private void construirCursos11() {
+        String v[] = {
+            "Science",
+            "Música",
+            "Hebreo",
+            "Sociales",
+            "Filosofía",
+            "Físico Química",
+            "Química",
+            "Biología",
+            "Estadística",
+            "Conversación ",
+            "Economía",
+            "Física",
+            "Phonetics",
+            "Grammar",
+            "Español",
+            "Literature",
+            "Ed. Física",
+            "Ed. Artística",
+            "Matemáticas",
+            "Geometría",
+            "Religión ",
+            "Ética"
+        };
+        Nodo_Curso x;
+        for (int i = 6; i < 12; i++) {
+            x = new Nodo_Curso();
+            for (int j = 0; j < v.length; j++) {
+                x.setNombreCurso(v[j].toString() + i);
+                x.setIdCurso(idCurso);
+                this.idCurso++;
+            }
+        }
+    }
+    
+    private void construirProfesores() {
+        String v[] = {
+            "BECKY COHEN",
+            "DARA HINCAPIÉ",
+            "PILAR MARTÍNEZ",
+            "ALEXANDER ZULUAGA",
+            "NOVER RUIZ",
+            "EDWIN ALEJANDRO CARTAGENA",
+            "JOSÉ FERNANDO JIMÉNEZ",
+            "ÓSCAR GÓMEZ",
+            "SERGIO SANDOVAL",
+            "LILIANA OCHOA",
+            "ALEJANDRO MONTES",
+            "CARLOS ANDRÉS MORA",
+            "ÁNGELA ECHEVERRI",
+            "MAURICIO GIL",
+            "DIANA ÁLVAREZ",
+            "LUZ ELENA MORENO",
+            "LEAH FELDMAN",
+            "ABRAHAM M",
+            "GIOVANNY TORRES",
+            "JAVIER RIVERA",
+            "FELIPE GONZÁLEZ ",
+            "JHON ARBOLEDA",
+            "ÓSCAR CASTAÑEDA",
+            "ADIS JANETH OSORIO",
+            "TALLULAH FLORES",
+            "WILVER MESA",
+            "JUAN LEÓN GONZÁLEZ",
+            "LILIANA CASTRILLÓN",
+            "DORA JARAMILLO",
+            "RICARDO OSORIO"
+        };
+
+        Nodo_profesor x;
+        for (int i = 1; i < v.length   ; i++) {
+            x = new Nodo_profesor();
+            x.setId_profesor(idProfesor);
+            this.idProfesor++;
+            x.setNombre(v[i]);
+            this.listaProfesores.insertarProfesor(x);
+        }
+    }
+    public void asignarDisponibilidad()
+    {
+        
     }
 }

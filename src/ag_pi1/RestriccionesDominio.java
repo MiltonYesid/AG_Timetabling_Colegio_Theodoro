@@ -118,7 +118,7 @@ public class RestriccionesDominio extends FitnessFunction {
             if (profesor != null) {
                 aux = i + 1;
                 idCurso = (Integer) cromosoma.getGene(aux).getAllele();
-                    this.profesorDictaCurso(idCurso, profesor);
+                    //this.profesorDictaCurso(idCurso, profesor);
             }
         }
         this.estructura.listaProfesores.buscar(0);
@@ -126,6 +126,7 @@ public class RestriccionesDominio extends FitnessFunction {
 
     public void profesorDictaCurso(int codigoCurso, Nodo_profesor profesor) {
         Nodo_Curso x = profesor.getListaCursos().getPrimero();
+        
         while (x != null) {
             if (x.getIdCurso() == codigoCurso) {
                 this.fitness = this.fitness + 10;
