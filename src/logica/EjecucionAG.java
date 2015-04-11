@@ -1,8 +1,11 @@
-package ag_pi1;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package logica;
 
-//Libreria JGAP
 import lista.Estructuras;
-import lista.Nodo_profesor;
 import org.jgap.Chromosome;
 import org.jgap.Configuration;
 import org.jgap.FitnessFunction;
@@ -11,16 +14,15 @@ import org.jgap.Genotype;
 import org.jgap.IChromosome;
 import org.jgap.InvalidConfigurationException;
 import org.jgap.impl.DefaultConfiguration;
-import org.jgap.impl.IntegerGene;
-import org.jgap.impl.StringGene;
 
-public class main {
 
+public class EjecucionAG {
+    
     /*
      * se obtiene las estructuras a trabajar
      */
     public static Estructuras estructura = new Estructuras();
-    public static AG_creador auxAG = new AG_creador();
+    public static MakerChromosoma makerChromosoma = new MakerChromosoma();
     /*
      variables del dominio
      */
@@ -29,7 +31,7 @@ public class main {
     private static final int totalHorasSemana = ((cantidadDias * cantidadHoras) - 1)*2;
     private static int nroEras = 50;
 
-    public static void main(String[] args) {
+    public void crearHorario(){
 
         try {
             //Configuramos JGAP
@@ -45,7 +47,7 @@ public class main {
             /*
              crear el cromosoma
              */
-            Gene[] genoma = auxAG.crearCromosoma(configuracion);
+            Gene[] genoma = makerChromosoma.crearCromosoma(configuracion);
             /*
              Creamos un individuo a partir de la configuracion de los genes anterior
              */
@@ -61,13 +63,13 @@ public class main {
                 System.out.println("Iteracion #" + m);
                 IChromosome mejor_individuo = population.getFittestChromosome(); //Obtenemos el mejor individuo para esta generacion
                 System.out.println("Mejor Individuo de la generacion " + m + " :");
-                auxAG.mostrarCromosoma(mejor_individuo);
+                makerChromosoma.mostrarCromosoma(mejor_individuo);
                 System.out.println("Valor de aptitud obtenido:" + mejor_individuo.getFitnessValue());
             }
             IChromosome bestSolutionSoFar = population.getFittestChromosome(); //mejor individuo obtenido
 
             System.out.println("Este es el mejor individuo encontrado para el cuadrado magico de 3x3 despues de 50 generaciones:");
-            auxAG.mostrarCromosoma(bestSolutionSoFar);//Mostramos al individuo
+            makerChromosoma.mostrarCromosoma(bestSolutionSoFar);//Mostramos al individuo
             System.out.println("Valor de aptitud obtenido:" + bestSolutionSoFar.getFitnessValue()); //Mostramos el valor obtenido en la función de aptitud para el mejor individuo
 
         } catch (InvalidConfigurationException ex) {

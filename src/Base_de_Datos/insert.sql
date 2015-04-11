@@ -1,3 +1,6 @@
+/*
+Profesores
+*/
 INSERT INTO dataBase_colegio_TH.Profesor (nombres) VALUES ('BECKY COHEN');
 INSERT INTO dataBase_colegio_TH.Profesor (nombres) VALUES ('DARA HINCAPIÉ');
 INSERT INTO dataBase_colegio_TH.Profesor (nombres) VALUES ('BECKY COHEN');
@@ -50,3 +53,7 @@ INSERT INTO dataBase_colegio_TH.Materia (nombreMateria, intensidad_Horaria, Peso
 INSERT INTO dataBase_colegio_TH.Materia (nombreMateria, intensidad_Horaria, Peso_Academico) VALUES ('Religión', 1, 1);
 INSERT INTO dataBase_colegio_TH.Materia (nombreMateria, intensidad_Horaria, Peso_Academico) VALUES ('Geometría', 2, 1);
 INSERT INTO dataBase_colegio_TH.Materia (nombreMateria, intensidad_Horaria, Peso_Academico) VALUES ('Biblioteca', 1, 1);
+/*
+To-do1
+1-Alimentar base de datos de profesores respectivas de profesores con grados 
+*/

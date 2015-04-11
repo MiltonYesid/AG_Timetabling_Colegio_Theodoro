@@ -1,6 +1,6 @@
-package ag_pi1;
 
-import static ag_pi1.main.estructura;
+package logica;
+
 import lista.Estructuras;
 import lista.Nodo_Curso;
 import lista.Nodo_profesor;
@@ -14,7 +14,7 @@ import org.jgap.impl.IntegerGene;
  *
  * @author Milton Yesid F G
  */
-public class AG_creador {
+public class MakerChromosoma {
 
     /*
      variables del dominio
